@@ -35,15 +35,39 @@ AppAsset::register($this);
             'class' => 'navbar-inverse navbar-fixed-top',
         ],
     ]);
-    echo Nav::widget([
+
+
+            $menuItems = [['label' => 'Главная', 'url' => ['/']]];
+
+            if (!Yii::$app->user->isGuest) {
+                
+                $menuItems = [
+                    
+                ['label' => 'Добавить товар', 'url' => ['/site/addproduct']],
+                ['label' => 'Заказы', 'url' => ['/site/orders']],
+                    ['label' => 'Выйти (' . Yii::$app->user->identity->username . ')',
+                    'url' => ['/site/logout'],
+                    'linkOptions' => ['data-method' => 'post']],
+                    
+                ];
+
+            }
+
+            echo Nav::widget([
+                'options' => ['class' => 'navbar-nav navbar-right'],
+                'items' => $menuItems,
+            ]); 
+
+   /* echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
-            ['label' => 'Home', 'url' => ['/site/index']],
+           ['label' => 'Home', 'url' => ['/site/index']],
             ['label' => 'About', 'url' => ['/site/about']],
-            ['label' => 'Contact', 'url' => ['/site/contact']],
+            ['label' => 'Contact', 'url' => ['/site/contact']], 
             Yii::$app->user->isGuest ? (
                 ['label' => 'Login', 'url' => ['/site/login']]
             ) : (
+                
                 '<li>'
                 . Html::beginForm(['/site/logout'], 'post')
                 . Html::submitButton(
@@ -52,9 +76,12 @@ AppAsset::register($this);
                 )
                 . Html::endForm()
                 . '</li>'
+                
+    
             )
+        
         ],
-    ]);
+    ]); */
     NavBar::end();
     ?>
 

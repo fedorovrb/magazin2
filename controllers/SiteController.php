@@ -20,10 +20,10 @@ class SiteController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['logout'],
+                'only' => ['logout', 'panel'],
                 'rules' => [
                     [
-                        'actions' => ['logout'],
+                        'actions' => ['logout', 'panel'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -114,13 +114,13 @@ class SiteController extends Controller
         ]);
     }
 
-    /**
-     * Displays about page.
-     *
-     * @return string
-     */
-    public function actionAbout()
+    public function actionAddproduct()
     {
-        return $this->render('about');
+        return $this->render('addproduct');
+    }
+    
+    public function actionOrders()
+    {
+        return $this->render('orders');
     }
 }
