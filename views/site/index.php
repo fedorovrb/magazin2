@@ -71,22 +71,32 @@ $provider = new ActiveDataProvider([
         ->from(['images'])
          ->where(['id' => $key['id']]);
      
-     $provider1 = new ActiveDataProvider([
-     'query' => $rows1,
-    ]);
+        $provider1 = new ActiveDataProvider([
+            'query' => $rows1,
+        ]);
   
  // возвращает массив объектов Post
- $posts = $provider1->getModels();
+    $posts = $provider1->getModels();
+        foreach($posts as $key1)
+        { 
+          echo "<div class = \"im\"><img src = \"".$key1['name']."\"  id = \"new\" width = \"200\" height = \"300\">";
+          break;
+        }
+
      
-     foreach($posts as $key1)
-    { 
-     echo '<img src = ' . $key1['name'] . ' width = 200 height = 200>';
-    } 
+        foreach($posts as $key1)
+        { 
+            echo " <label class= \"cha\">";
+            echo " <input type=\"radio\" value = \"".$key1['name']."\" name = \"dsadsa\"  id = \"dsadsa\">";
+            echo " <img id = \"vse\" src = \"".$key1['name']."\" width = \"70\" height = \"90\" id = \"new\"  onclick = \"javascript:colorr(src)\">";
+            echo "</label>";
+        } 
+        
      
      echo $key['name'];
      echo $key['articul'];
      echo $key['price'];
- } 
+} 
 
 ?>
 <script>
@@ -98,7 +108,7 @@ img.src = a;
 
 
 
-img.setAttribute("id", "new");
+img.setAttribute("id", "new");img.setAttribute("width", "200");img.setAttribute("height", "300");
 
 // создаем ссылку на существующий элемент который будем заменять
 var sp2 = document.getElementById("new");
@@ -109,3 +119,20 @@ parentDiv.replaceChild(img, sp2);
 
 }
 </script>
+<style>
+label > input{ /* HIDE RADIO */
+          visibility: hidden; /* Makes input not-clickable */
+          position: absolute; /* Remove input from document flow */
+        }
+    label > input + img{ /* IMAGE STYLES */
+                  cursor:pointer;
+                  border:2px solid transparent;
+        }
+    label > input:checked + img{ /* (RADIO CHECKED) IMAGE STYLES */
+              border:5px solid #f00;
+        border-radius: 5px;
+    }
+    .cha > input:checked + img{ /* (RADIO CHECKED) IMAGE STYLES */
+              border:5px solid gray;
+        border-radius: 5px;
+    }</style>
