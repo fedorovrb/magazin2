@@ -17,5 +17,5 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= $this->render('_form', [
         'model' => $model,
     ]) ?>
-
+<p>В названии фото не должно быть пробелов!!!</p>
 </div>

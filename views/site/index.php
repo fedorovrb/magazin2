@@ -1,5 +1,5 @@
 <?php
-
+use yii\data\ActiveDataProvider;
 /* @var $this yii\web\View */
 
 $this->title = 'My Yii Application';
@@ -51,3 +51,61 @@ $this->title = 'My Yii Application';
 
     </div>
 </div>
+<?
+$rows = (new \yii\db\Query())
+        ->from(['product']);
+
+$provider = new ActiveDataProvider([
+     'query' => $rows,
+ ]);
+  
+ // возвращает массив объектов Post
+ $posts = $provider->getModels();
+    
+  
+         
+ foreach($posts as $key)
+ { 
+     
+        $rows1= (new \yii\db\Query())
+        ->from(['images'])
+         ->where(['id' => $key['id']]);
+     
+     $provider1 = new ActiveDataProvider([
+     'query' => $rows1,
+    ]);
+  
+ // возвращает массив объектов Post
+ $posts = $provider1->getModels();
+     
+     foreach($posts as $key1)
+    { 
+     echo '<img src = ' . $key1['name'] . ' width = 200 height = 200>';
+    } 
+     
+     echo $key['name'];
+     echo $key['articul'];
+     echo $key['price'];
+ } 
+
+?>
+<script>
+function colorr(src){
+
+var a = src;
+var img = document.createElement("IMG"); 
+img.src = a;
+
+
+
+img.setAttribute("id", "new");
+
+// создаем ссылку на существующий элемент который будем заменять
+var sp2 = document.getElementById("new");
+var parentDiv = sp2.parentNode;
+
+// заменяем существующий элемент sp2 на созданный нами img
+parentDiv.replaceChild(img, sp2);
+
+}
+</script>

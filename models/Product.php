@@ -34,6 +34,7 @@ class Product extends \yii\db\ActiveRecord
             [['price'], 'integer'],
             [['name'], 'string', 'max' => 100],
             [['articul'], 'string', 'max' => 20],
+            [['description'], 'string', 'max' => 1000],
             [['imageFiles'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg', 'maxFiles' => 4],
         ];
     }
@@ -47,6 +48,7 @@ class Product extends \yii\db\ActiveRecord
             'id' => 'ID',
             'name' => 'Name',
             'articul' => 'Articul',
+            'description' => 'Description',
             'price' => 'Price',
             'imageFiles' => 'imageFiles',
         ];
@@ -58,7 +60,7 @@ class Product extends \yii\db\ActiveRecord
             foreach ($this->imageFiles as $file) {
                 $file->saveAs($file->baseName . '.' . $file->extension);
                  Yii::$app->db->createCommand()->insert('images', [
-                     'id' => $this->id,
+                    'id' => $this->id,
                     'name' => $file->baseName . '.' . $file->extension,
            ])->execute();
             }

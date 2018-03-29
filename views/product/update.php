@@ -24,6 +24,8 @@ $this->params['breadcrumbs'][] = 'Update';
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'articul')->textInput(['maxlength' => true]) ?>
+    
+    <?= $form->field($model, 'description')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'price')->textInput() ?>
     
