@@ -1,7 +1,7 @@
 <?php
 
 namespace app\models;
-
+use yii\web\UploadedFile;
 use Yii;
 
 /**
@@ -14,6 +14,8 @@ use Yii;
  */
 class Product extends \yii\db\ActiveRecord
 {
+
+    public $imageFiles;
     /**
      * @inheritdoc
      */
@@ -32,6 +34,7 @@ class Product extends \yii\db\ActiveRecord
             [['price'], 'integer'],
             [['name'], 'string', 'max' => 100],
             [['articul'], 'string', 'max' => 20],
+            [['imageFiles'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg', 'maxFiles' => 4],
         ];
     }
 
@@ -45,6 +48,24 @@ class Product extends \yii\db\ActiveRecord
             'name' => 'Name',
             'articul' => 'Articul',
             'price' => 'Price',
+            'imageFiles' => 'imageFiles',
         ];
     }
+    
+    public function upload()
+    {
+        if ($this->validate()) { 
+            foreach ($this->imageFiles as $file) {
+                $file->saveAs($file->baseName . '.' . $file->extension);
+                 Yii::$app->db->createCommand()->insert('images', [
+                     'id' => $this->id,
+                    'name' => $file->baseName . '.' . $file->extension,
+           ])->execute();
+            }
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
 }
