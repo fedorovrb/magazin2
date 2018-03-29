@@ -43,8 +43,8 @@ AppAsset::register($this);
                 
                 $menuItems = [
                     
-                ['label' => 'Добавить товар', 'url' => ['/site/addproduct']],
-                ['label' => 'Заказы', 'url' => ['/site/orders']],
+                ['label' => 'Добавить товар', 'url' => ['/product/index']],
+                ['label' => 'Заказы', 'url' => ['/product/orders']],
                     ['label' => 'Выйти (' . Yii::$app->user->identity->username . ')',
                     'url' => ['/site/logout'],
                     'linkOptions' => ['data-method' => 'post']],

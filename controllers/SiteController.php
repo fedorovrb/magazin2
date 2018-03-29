@@ -20,10 +20,10 @@ class SiteController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['logout', 'panel'],
+                'only' => ['logout'],
                 'rules' => [
                     [
-                        'actions' => ['logout', 'panel'],
+                        'actions' => ['logout'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -112,15 +112,5 @@ class SiteController extends Controller
         return $this->render('contact', [
             'model' => $model,
         ]);
-    }
-
-    public function actionAddproduct()
-    {
-        return $this->render('addproduct');
-    }
-    
-    public function actionOrders()
-    {
-        return $this->render('orders');
     }
 }
